@@ -196,18 +196,16 @@ fn draw_quad(v0 u8, v1 u8, v2 u8, v3 u8, c u8)  {
 }
 
 fn draw_cube(v [4]fn () f32)  {
-	//m := gx.Mtx{}
-	//mv := gx.Mtx{}
-	//axis := gx.GuVector {
-	///*FAILED TO FIND STRUCT "gx.GuVector"*/-1, 1, 0}
+	m := &[4]fn () f32 {return 0.0}
+	mv := &[4]fn () f32 {return 0.0}
+	axis := gx.GuVector {
+	/*FAILED TO FIND STRUCT "gx.GuVector"*/-1, 1, 0}
 	
-	//rotateby := 0
-	//rotateby ++
-	//gx.gumtxidentity(m)
-	//gx.gumtxrotaxisrad(m, &axis, ((rotateby) * 0.0174532924))
-	//gx.gumtxtransapply(m, m, 0, 0, -200)
-	//gx.gumtxconcat(v, m, mv)
-	//gx.loadposmtximm(&mv, 0)
+	gx.gumtxidentity(m)
+	gx.gumtxrotaxisrad(m, &axis, ((0) * 0.0174532924))
+	gx.gumtxtransapply(m, m, 0, 0, -200)
+	gx.gumtxconcat(v, m, mv)
+	gx.loadposmtximm(mv, 0)
 	gx.begin(128, 0, 24)
 	draw_quad(0, 3, 2, 1, 0)
 	draw_quad(0, 7, 6, 3, 1)

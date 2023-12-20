@@ -26,14 +26,14 @@ pub struct GXRModeObj {
 	vfilter[7] u8
 }
 
-type Mtx = [3][4]f32
-type MtxP = [4]fn () f32
-type ROMtx = [4][3]f32
-type ROMtxP = [3]fn () f32
-type Mtx33 = [3][3]f32
-type Mtx33P = [3]fn () f32
-type Mtx44 = [4][4]f32
-type Mtx44P = [4]fn () f32
+pub type Mtx = mut [3][4]f32
+pub type MtxP = [4]fn () f32
+pub type ROMtx = [4][3]f32
+pub type ROMtxP = [3]fn () f32
+pub type Mtx33 = [3][3]f32
+pub type Mtx33P = [3]fn () f32
+pub type Mtx44 = [4][4]f32
+pub type Mtx44P = [4]fn () f32
 union WGPipe { 
 	u8 u8  
 	i8 i8  

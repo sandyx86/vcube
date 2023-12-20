@@ -1442,7 +1442,7 @@ struct multi_return_f64_int {
 static bool Array_u8_contains(Array_u8 a, u8 v); // auto
 
 // V alias definitions:
-typedef Array_fixed_Array_fixed_f32_4_3 gx__Mtx;
+typedef Array_fixed_Array_fixed_f32_4_3* gx__Mtx;
 typedef Array_fixed_anon_fn___f32_4 gx__MtxP;
 typedef Array_fixed_Array_fixed_f32_3_4 gx__ROMtx;
 typedef Array_fixed_anon_fn___f32_3 gx__ROMtxP;
@@ -2463,6 +2463,8 @@ VV_LOCAL_SYMBOL f32 anon_fn_aa4c3c73e99943ac___f32_1369(void);
 VV_LOCAL_SYMBOL void main__draw_init(void);
 VV_LOCAL_SYMBOL void main__draw_quad(u8 v0, u8 v1, u8 v2, u8 v3, u8 c);
 VV_LOCAL_SYMBOL void main__draw_cube(Array_fixed_anon_fn___f32_4 v);
+VV_LOCAL_SYMBOL f32 anon_fn_aa4c3c73e99943ac___f32_4326(void);
+VV_LOCAL_SYMBOL f32 anon_fn_aa4c3c73e99943ac___f32_4360(void);
 
 static bool Array_rune_arr_eq(Array_rune a, Array_rune b); // auto
 
@@ -2720,6 +2722,20 @@ static bool Array_rune_arr_eq(Array_rune a, Array_rune b) {
 
 /*F*/
 	VV_LOCAL_SYMBOL f32 anon_fn_aa4c3c73e99943ac___f32_1369(void) {
+	f32 _t1 = 0.0;
+	return _t1;
+}
+	
+
+/*F*/
+	VV_LOCAL_SYMBOL f32 anon_fn_aa4c3c73e99943ac___f32_4326(void) {
+	f32 _t1 = 0.0;
+	return _t1;
+}
+	
+
+/*F*/
+	VV_LOCAL_SYMBOL f32 anon_fn_aa4c3c73e99943ac___f32_4360(void) {
 	f32 _t1 = 0.0;
 	return _t1;
 }
@@ -14080,7 +14096,7 @@ VV_LOCAL_SYMBOL void main__main(void) {
 	curr_fb = 0U;
 	first_frame = 0U;
 	voidptr gp_fifo = (((voidptr)(0)));
-	gp_fifo = main__memalign(32U, (262144));
+	gp_fifo = memalign(32U, (262144));
 	memset(gp_fifo, 0, (262144));
 	array_set(&xfb, 0, &(voidptr[]) { ((voidptr)((((u32)((SYS_AllocateFramebuffer(rmode)))) + ((3221225472) - (2147483648))))) });
 	array_set(&xfb, 1, &(voidptr[]) { ((voidptr)((((u32)((SYS_AllocateFramebuffer(rmode)))) + ((3221225472) - (2147483648))))) });
@@ -14144,8 +14160,8 @@ VV_LOCAL_SYMBOL void main__draw_init(void) {
 	GX_SetVtxDesc(11, 2);
 	GX_SetVtxAttrFmt(0, 9U, 1U, 3U, 0U);
 	GX_SetVtxAttrFmt(0, 11U, 1U, 5U, 0U);
-	GX_SetArray(9U, (voidptr)&/*qq*/_const_main__cube, 3 * sizeof(i16));
-	GX_SetArray(11U, (voidptr)&/*qq*/_const_main__colors, 4 * sizeof(u8));
+	GX_SetArray(9U, (voidptr)&/*qq*/cube, 3 * sizeof(i16));
+	GX_SetArray(11U, (voidptr)&/*qq*/colors, 4 * sizeof(u8));
 	GX_SetNumChans(1);
 	GX_SetNumTexGens(0U);
 	GX_SetTevOrder(0, 255, 255U, 4);
@@ -14164,6 +14180,16 @@ VV_LOCAL_SYMBOL void main__draw_quad(u8 v0, u8 v1, u8 v2, u8 v3, u8 c) {
 }
 
 VV_LOCAL_SYMBOL void main__draw_cube(Array_fixed_anon_fn___f32_4 v) {
+	Array_int* m = HEAP(Array_int, new_array_from_c_array(1, 1, sizeof(int), _MOV((int[1]){4})));
+	anon_fn_aa4c3c73e99943ac___f32_4326;
+	Array_int* mv = HEAP(Array_int, new_array_from_c_array(1, 1, sizeof(int), _MOV((int[1]){4})));
+	anon_fn_aa4c3c73e99943ac___f32_4360;
+	gx__GuVector axis = ((gx__GuVector){.x = -1,.y = 1,.z = 0,});
+	c_guMtxIdentity(m);
+	c_guMtxRotAxisRad(m, &axis, ((0) * 0.0174532924));
+	c_guMtxTransApply(m, m, 0, 0, -200);
+	c_guMtxConcat(v, m, mv);
+	GX_LoadPosMtxImm(mv, 0U);
 	GX_Begin(128, 0, 24U);
 	main__draw_quad(0, 3, 2, 1, 0);
 	main__draw_quad(0, 7, 6, 3, 1);
